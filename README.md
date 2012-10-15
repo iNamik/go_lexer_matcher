@@ -155,7 +155,7 @@ EXAMPLE
 
 Below is an (slightly modified) excerpt from examples/json_decoder that matches a
 JSON integer as outlined in RFC 4627 ( see http://www.ietf.org/rfc/rfc4627.txt ).
-Notice how the regex shown maps directly to Matcher funtion calls.
+Notice how the regex shown maps directly to Matcher function calls.
 
 	var bytesDigits = rangeutil.RangeToBytes("0-9")
 
