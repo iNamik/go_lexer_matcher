@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"os"
 	"strconv"
-	"strings"
 )
 
 // iNamik imports
@@ -158,23 +157,19 @@ func tokenTypeAsString(t lexer.TokenType) string {
  */
 func main() {
 
-	jsonText, err := ioutil.ReadAll(os.Stdin)
+	jsonBytes, err := ioutil.ReadAll(os.Stdin)
 
 	if err != nil {
 		fmt.Printf("%v\n", err)
 		usage()
 	}
 
-	if jsonText == nil || len(jsonText) == 0 {
+	if jsonBytes == nil || len(jsonBytes) == 0 {
 		usage()
 	}
 
 	// Create a new lexer to turn the input text into tokens
-	// NOTE : Yes, it seems redundant to create a new reader after going out of
-	//        our way to read all the input from io.Stdin, but since we can't
-	//        know the longest quoted string on the input, we have to use the
-	//        length of the entire string as our buffer len.
-	l := lexer.New(lex, strings.NewReader(string(jsonText)), len(jsonText), 3)
+	l := lexer.NewFromBytes(lex, jsonBytes, 3)
 
 	// Create a new parser that feeds off the lexer and generates expression values
 	p := parser.New(parse, l, 1)
@@ -314,18 +309,8 @@ func lexQuotedString(l lexer.Lexer) lexer.StateFn {
 			l.NextRune() // Consume 'u'
 			l.EmitToken(T_CHAR_LOWER_U)
 
-			m := matcher.New(l)
-
 			// Match a 4-char hex string
-			if m.
-				MatchOneBytes(bytesHex).
-				And().
-				MatchOneBytes(bytesHex).
-				And().
-				MatchOneBytes(bytesHex).
-				And().
-				MatchOneBytes(bytesHex).
-				Result() {
+			if l.MatchMinMaxBytes(bytesHex, 4, 4) {
 				l.EmitTokenWithBytes(T_CHAR_HEX_WORD)
 			}
 

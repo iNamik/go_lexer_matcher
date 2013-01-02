@@ -76,11 +76,17 @@ Below are the interfaces for the main Matcher types:
 		// MatchZeroOrOneRune consumes the next rune if it matches, always returning true
 		MatchZeroOrOneRune(rune) MatcherOperator
 
+		// MatchZeroOrOneFunc consumes the next rune if it matches, always returning true
+		MatchZeroOrOneFunc(lexer.MatchFn) MatcherOperator
+
 		// MatchZeroOrMoreBytes consumes a run of matching runes, always returning true
 		MatchZeroOrMoreBytes([]byte) MatcherOperator
 
 		// MatchZeroOrMoreRunes consumes a run of matching runes, always returning true
 		MatchZeroOrMoreRunes([]rune) MatcherOperator
+
+		// MatchZeroOrMoreFunc consumes a run of matching runes, always returning true
+		MatchZeroOrMoreFunc(lexer.MatchFn) MatcherOperator
 
 		// MatchOneBytes consumes the next rune if its in the list of bytes
 		MatchOneBytes([]byte) MatcherOperator
@@ -91,11 +97,26 @@ Below are the interfaces for the main Matcher types:
 		// MatchOneRune consumes the next rune if it matches
 		MatchOneRune(rune) MatcherOperator
 
+		// MatchOneFunc consumes the next rune if it matches
+		MatchOneFunc(lexer.MatchFn) MatcherOperator
+
 		// MatchOneOrMoreBytes consumes a run of matching runes
 		MatchOneOrMoreBytes([]byte) MatcherOperator
 
 		// MatchOneOrMoreRunes consumes a run of matching runes
 		MatchOneOrMoreRunes([]rune) MatcherOperator
+
+		// MatchOneOrMoreFunc consumes a run of matching runes
+		MatchOneOrMoreFunc(lexer.MatchFn) MatcherOperator
+
+		// MatchMinMaxBytes consumes a specified run of matching runes
+		MatchMinMaxBytes([]byte, int, int) MatcherOperator
+
+		// MatchMinMaxRunes consumes a specified run of matching runes
+		MatchMinMaxRunes([]rune, int, int) MatcherOperator
+
+		// MatchMinMaxFunc consumes a specified run of matching runes
+		MatchMinMaxFunc(lexer.MatchFn, int, int) MatcherOperator
 
 		// NonMatchZeroOrOneBytes consumes the next rune if it does not match, always returning true
 		NonMatchZeroOrOneBytes([]byte) MatcherOperator
@@ -103,11 +124,17 @@ Below are the interfaces for the main Matcher types:
 		// NonMatchZeroOrOneRuness consumes the next rune if it does not match, always returning true
 		NonMatchZeroOrOneRunes([]rune) MatcherOperator
 
+		// NonMatchZeroOrOneFunc consumes the next rune if it does not match, always returning true
+		NonMatchZeroOrOneFunc(lexer.MatchFn) MatcherOperator
+
 		// NonMatchZeroOrMoreBytes consumes a run of non-matching runes, always returning true
 		NonMatchZeroOrMoreBytes([]byte) MatcherOperator
 
 		// NonMatchZeroOrMoreRunes consumes a run of non-matching runes, always returning true
 		NonMatchZeroOrMoreRunes([]rune) MatcherOperator
+
+		// NonMatchZeroOrMoreFunc consumes a run of non-matching runes, always returning true
+		NonMatchZeroOrMoreFunc(lexer.MatchFn) MatcherOperator
 
 		// NonMatchOneBytes consumes the next rune if its NOT in the list of bytes
 		NonMatchOneBytes([]byte) MatcherOperator
@@ -115,11 +142,17 @@ Below are the interfaces for the main Matcher types:
 		// NonMatchOneRuness consumes the next rune if its NOT in the list of bytes
 		NonMatchOneRunes([]rune) MatcherOperator
 
+		// NonMatchOneFunc consumes the next rune if it does NOT match
+		NonMatchOneFunc(lexer.MatchFn) MatcherOperator
+
 		// NonMatchOneOrMoreBytes consumes a run of non-matching runes
 		NonMatchOneOrMoreBytes([]byte) MatcherOperator
 
 		// NonMatchOneOrMoreRunes consumes a run of non-matching runes
 		NonMatchOneOrMoreRunes([]rune) MatcherOperator
+
+		// NonMatchOneOrMoreFunc consumes a run of non-matching runes
+		NonMatchOneOrMoreFunc(lexer.MatchFn) MatcherOperator
 
 		// MatchEOF tries to match the next rune against RuneEOF
 		MatchEOF() MatcherOperator
@@ -140,6 +173,9 @@ Below are the interfaces for the main Matcher types:
 		// Result returns the final result of the matcher, resetting the
 		// matcher state if the result is false.
 		Result() bool
+
+		// Reset resets the state of the matcher
+		Reset() Matcher
 	}
 
 	type MatcherEnd interface {
@@ -183,9 +219,6 @@ Below are the interfaces for the main Matcher types:
 		// Result returns the final result of the matcher, resetting the
 		// matcher state if the result is false.
 		Result() bool
-
-		// Reset resets the state of the matcher
-		Reset() Matcher
 	}
 
 

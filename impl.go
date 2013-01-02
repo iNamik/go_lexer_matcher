@@ -1,5 +1,9 @@
 package matcher
 
+import (
+	"github.com/iNamik/go_lexer"
+)
+
 /*****************************************************************************
  * Matcher
  *****************************************************************************/
@@ -33,6 +37,12 @@ func (m *matcher) MatchZeroOrOneRune(match rune) MatcherOperator {
 	return m
 }
 
+// Matcher::MatchZeroOrOneFunc
+func (m *matcher) MatchZeroOrOneFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.MatchZeroOrOneFunc(match) })
+	return m
+}
+
 // Matcher::MatchZeroOrMoreBytes
 func (m *matcher) MatchZeroOrMoreBytes(match []byte) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.MatchZeroOrMoreBytes(match) })
@@ -42,6 +52,12 @@ func (m *matcher) MatchZeroOrMoreBytes(match []byte) MatcherOperator {
 // Matcher::MatchZeroOrMoreRunes
 func (m *matcher) MatchZeroOrMoreRunes(match []rune) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.MatchZeroOrMoreRunes(match) })
+	return m
+}
+
+// Matcher::MatchZeroOrMoreFunc
+func (m *matcher) MatchZeroOrMoreFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.MatchZeroOrMoreFunc(match) })
 	return m
 }
 
@@ -63,6 +79,12 @@ func (m *matcher) MatchOneRune(match rune) MatcherOperator {
 	return m
 }
 
+// Matcher::MatchOneFunc
+func (m *matcher) MatchOneFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.MatchOneFunc(match) })
+	return m
+}
+
 // Matcher::MatchOneOrMoreBytes
 func (m *matcher) MatchOneOrMoreBytes(match []byte) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.MatchOneOrMoreBytes(match) })
@@ -72,6 +94,30 @@ func (m *matcher) MatchOneOrMoreBytes(match []byte) MatcherOperator {
 // Matcher::MatchOneOrMoreRuness
 func (m *matcher) MatchOneOrMoreRunes(match []rune) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.MatchOneOrMoreRunes(match) })
+	return m
+}
+
+// Matcher::MatchOneOrMoreFunc
+func (m *matcher) MatchOneOrMoreFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.MatchOneOrMoreFunc(match) })
+	return m
+}
+
+// MatchMinMaxBytes consumes a specified run of matching runes
+func (m *matcher) MatchMinMaxBytes(match []byte, min int, max int) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.MatchMinMaxBytes(match, min, max) })
+	return m
+}
+
+// MatchMinMaxRunes consumes a specified run of matching runes
+func (m *matcher) MatchMinMaxRunes(match []rune, min int, max int) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.MatchMinMaxRunes(match, min, max) })
+	return m
+}
+
+// MatchMinMaxFunc consumes a specified run of matching runes
+func (m *matcher) MatchMinMaxFunc(match lexer.MatchFn, min int, max int) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.MatchMinMaxFunc(match, min, max) })
 	return m
 }
 
@@ -87,6 +133,12 @@ func (m *matcher) NonMatchZeroOrOneRunes(match []rune) MatcherOperator {
 	return m
 }
 
+// Matcher::NonMatchZeroOrOneFunc
+func (m *matcher) NonMatchZeroOrOneFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.NonMatchZeroOrOneFunc(match) })
+	return m
+}
+
 // Matcher::NonMatchZeroOrMoreBytes
 func (m *matcher) NonMatchZeroOrMoreBytes(match []byte) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.NonMatchZeroOrMoreBytes(match) })
@@ -96,6 +148,12 @@ func (m *matcher) NonMatchZeroOrMoreBytes(match []byte) MatcherOperator {
 // Matcher::NonMatchZeroOrMoreRunes
 func (m *matcher) NonMatchZeroOrMoreRunes(match []rune) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.NonMatchZeroOrMoreRunes(match) })
+	return m
+}
+
+// Matcher::NonMatchZeroOrMoreFunc
+func (m *matcher) NonMatchZeroOrMoreFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.NonMatchZeroOrMoreFunc(match) })
 	return m
 }
 
@@ -111,6 +169,12 @@ func (m *matcher) NonMatchOneRunes(match []rune) MatcherOperator {
 	return m
 }
 
+// Matcher::NonMatchOneFunc
+func (m *matcher) NonMatchOneFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.NonMatchOneFunc(match) })
+	return m
+}
+
 // Matcher::NonMatchOneOrMoreBytes
 func (m *matcher) NonMatchOneOrMoreBytes(match []byte) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.NonMatchOneOrMoreBytes(match) })
@@ -120,6 +184,12 @@ func (m *matcher) NonMatchOneOrMoreBytes(match []byte) MatcherOperator {
 // Matcher::NonMatchOneOrMoreRunes
 func (m *matcher) NonMatchOneOrMoreRunes(match []rune) MatcherOperator {
 	m.doMatch(func() bool { return m.lexer.NonMatchOneOrMoreRunes(match) })
+	return m
+}
+
+// Matcher::NonMatchOneOrMoreFunc
+func (m *matcher) NonMatchOneOrMoreFunc(match lexer.MatchFn) MatcherOperator {
+	m.doMatch(func() bool { return m.lexer.NonMatchOneOrMoreFunc(match) })
 	return m
 }
 
