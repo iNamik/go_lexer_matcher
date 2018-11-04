@@ -226,7 +226,7 @@ INSTALL
 -------
 
 The package is built using the Go tool.  Assuming you have correctly set the
-$GOPATH variable, you can run the folloing command:
+$GOPATH variable, you can run the following command:
 
 	go get github.com/iNamik/go_lexer_matcher
 
